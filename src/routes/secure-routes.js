@@ -33,13 +33,27 @@ router.post('/addPost', async (req, res) => {
 router.post('/subscribe', async (req, res) => {
   const subscription = req.body.subscription
   res.status(201).json({})
-  var sub = SubscriptionModel.findOne({ endpoint: subscription.endpoint })
-  if (!sub) {
-    sub = await SubscriptionModel.create(subscription)
-    await UserModel.findByIdAndUpdate(req.body.id, { $push: {
-      'Subscribers': sub._id
-    } })
+  console.log(subscription.endpoint)
+  var sub = SubscriptionModel.find({ endpoint: subscription.endpoint })
+  if (!sub.endpoint) {
+    // Means Subscription device doesn't exist sooo, from new browser the user is using donut
+    const device = await SubscriptionModel.create(subscription)
+    // We'll add the sub id to the devices in user model
+    await UserModel.findByIdAndUpdate(req.user._id, {
+      $push: {
+        'Devices': device._id
+      }
+    })
   }
+  try {
+    // Adding Subscriber ID to the user
+    await UserModel.findByIdAndUpdate(req.body.id, { $push: {
+      'Subscribers': req.user._id
+    } })
+  } catch (err) {
+    console.error(err)
+  }
+
   const payload = JSON.stringify({
     'notification': {
       'title': 'Push notifications with Service Workers'

@@ -18,11 +18,11 @@ async function send () {
   })
   const newBody = {
     subscription: subscription,
-    id: '5d1864ac0b9a7f41c41184b8' // thw user client wants to subscribe XD XD
+    id: '5d1e5ff9a842a53d91db8d95' // thw user client wants to subscribe XD XD
   }
   const sub = JSON.stringify(newBody)
   console.log('Push Registered')
-  var data = await fetch('/user/subscribe?secret_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVkMWE2MzgxZjJhODg0NTE3Nzc5NGJhNyIsImVtYWlsIjoiaGlAZ21haWwuY29tIn0sImlhdCI6MTU2MjAxMjU1M30.TLDSh4YzMkY6e7Etncc_8pocHq4Ry_sy9UcoTxIMEf8', {
+  var data = await fetch('/user/subscribe?secret_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVkMWU1ZmY5YTg0MmE1M2Q5MWRiOGQ5NSIsImVtYWlsIjoid2VydHl1QGdtYWlsLmNvbSJ9LCJpYXQiOjE1NjIyNzE3NDZ9.kxisNN3FZSnaytuK0hcBniL4wg5hVrW-1TRZqNfJ97I', {
     method: 'POST',
     body: sub,
     headers: {

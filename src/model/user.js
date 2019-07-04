@@ -15,8 +15,13 @@ const UserSchema = new Schema({
     type: [String]
   },
   Subscribers: {
-    type: Schema.Types.ObjectId,
-    ref: 'subscription'
+    type: [Schema.Types.ObjectId],
+    default: []
+  },
+  Devices: {
+    type: [Schema.Types.ObjectId],
+    ref: 'subscriptions',
+    default: []
   }
 })
 UserSchema.pre('save', async function (next) {
